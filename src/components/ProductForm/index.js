@@ -9,9 +9,10 @@ import {
   CheckBox,
   CheckBoxLabel,
   Botoes,
-  Button
+  Button,
 } from "./styles";
 import CustomInput from "../CustomInput/index";
+import Thumb from "../Thumb";
 
 function ProductForm({ data, handleSave }) {
   const hoje = new Date();
@@ -31,7 +32,7 @@ function ProductForm({ data, handleSave }) {
   });
 
   useEffect(() => {
-    if (data){
+    if (data) {
       setFormValues(data);
     }
   }, [setFormValues, data]);
@@ -60,7 +61,7 @@ function ProductForm({ data, handleSave }) {
       hoje,
       "Data máxima de aquisição não deve ser superior à data atual"
     ),
-    imagem: Yup.mixed().required("Carregue uma imagem")
+    imagem: Yup.mixed().required("Carregue uma imagem"),
   });
 
   return (
@@ -71,7 +72,7 @@ function ProductForm({ data, handleSave }) {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, handleChange }) => (
+        {({ values, handleChange, setFieldValue }) => (
           <Form>
             <h1>Produtos</h1>
             <CustomInput label="Nome" name="nome" type="text" />
@@ -131,7 +132,20 @@ function ProductForm({ data, handleSave }) {
               type="date"
             />
 
-            <CustomInput label="Imagem" name="imagem" type="file" />
+            <Medidas>
+              <div className="form-group">
+                <label for="imagem">Carregar Imagem</label>
+                <input
+                  name="imagem"
+                  type="file"
+                  onChange={(event) => {
+                    setFieldValue("file", event.currentTarget.files[0]);
+                  }}
+                  className="form-control"
+                />
+                <Thumb file={values.file} />
+              </div>
+            </Medidas>
 
             <Botoes>
               <div>

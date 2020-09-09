@@ -1,9 +1,6 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Formik } from "formik";
-import yup from "yup";
 
-export const Thumb = () =>{
+class Thumb extends React.Component {
   state = {
     loading: false,
     thumb: undefined,
@@ -25,56 +22,18 @@ export const Thumb = () =>{
 
   render() {
     const { file } = this.props;
-    const { loading, thumb } = this.state;
+    const { thumb } = this.state;
 
     if (!file) { return null; }
-
-    if (loading) { return <p>loading...</p>; }
 
     return (<img src={thumb}
       alt={file.name}
       className="img-thumbnail mt-2"
       height={200}
-      width={200} />);
+      width={200} 
+      paddingTop={20}  
+      />);
   }
 }
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="container">
-        <Formik 
-          initialValues={{ file: null }}
-          onSubmit={(values) => {
-            alert(
-              JSON.stringify(
-                { 
-                  fileName: values.file.name, 
-                  type: values.file.type,
-                  size: `${values.file.size} bytes`
-                },
-                null,
-                2
-              )
-            );
-          }} 
-          validationSchema={yup.object().shape({
-            file: yup.mixed().required(),
-          })}
-          render={({ values, handleSubmit, setFieldValue }) => {
-            return (
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label for="file">Carregar Imagem</label>
-                  <input id="file" name="file" type="file" onChange={(event) => {
-                    setFieldValue("file", event.currentTarget.files[0]);
-                  }} className="form-control" />
-                  <Thumb file={values.file} />
-                </div>            
-              </form>
-            );
-          }} />
-      </div>
-    );
-  }
-};
+export default Thumb;
