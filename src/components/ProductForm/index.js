@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { format } from "date-fns";
 
 import {
   Container,
@@ -14,9 +15,7 @@ import {
 import CustomInput from "../CustomInput/index";
 import Thumb from "../Thumb";
 
-function ProductForm({ data, handleSave }) {
-  const hoje = new Date();
-
+function ProductForm({ data, handleSave, handleCancel }) {
   const [valoresIniciais, setValoresIniciais] = useState({
     nome: "teste",
     descricao: "teste",
@@ -25,10 +24,10 @@ function ProductForm({ data, handleSave }) {
     comprimento: 0,
     peso: 0,
     codigoBarras: 0,
+    dataAquisicao: format(new Date(), "yyyy-MM-dd"),
     categorias: [],
     valor: 1,
-    dataAquisicao: hoje,
-    imagem: null,
+    // imagem: null,
   });
 
   useEffect(() => {
@@ -57,10 +56,10 @@ function ProductForm({ data, handleSave }) {
     valor: Yup.number()
       .positive("O valor deve ser positivo")
       .required("Valor deve ser preenchido"),
-    // dataAquisicao: Yup.date().max(
-    //   hoje,
-    //   "Data máxima de aquisição não deve ser superior à data atual"
-    // ),
+    dataAquisicao: Yup.date().max(
+      new Date(),
+      "Data máxima de aquisição não deve ser superior à data atual"
+    ),
     // imagem: Yup.mixed().required("Carregue uma imagem"),
   });
 
@@ -131,11 +130,11 @@ function ProductForm({ data, handleSave }) {
             />
             <CustomInput label="Valor (R$)" name="valor" type="number" />
 
-            {/* <CustomInput
+            <CustomInput
               label="Data de Aquisição"
               name="dataAquisicao"
               type="date"
-            /> */}
+            />
 
             {/* <Medidas>
               <div className="form-group">
@@ -158,7 +157,7 @@ function ProductForm({ data, handleSave }) {
               </div>
 
               <div>
-                <Button type="cancel">Cancelar</Button>
+                <Button type="button" onClick={handleCancel}>Cancelar</Button>
               </div>
             </Botoes>
           </Form>

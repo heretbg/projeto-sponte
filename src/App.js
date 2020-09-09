@@ -20,6 +20,10 @@ function App() {
     setState(CREATING);
   };
 
+  const handleCancel = () => {
+    setState(LISTING);
+  };
+
   const createProduct = (product) => {
     product.id = nextId;
     setProducts([...products, product]);
@@ -57,9 +61,15 @@ function App() {
             handleDelete={handleDelete}
           />
         )}
-        {state === CREATING && <ProductForm handleSave={createProduct} />}
+        {state === CREATING && (
+          <ProductForm handleSave={createProduct} handleCancel={handleCancel} />
+        )}
         {state === UPDATING && (
-          <ProductForm data={selectedProduct} handleSave={updateProduct} />
+          <ProductForm
+            data={selectedProduct}
+            handleSave={updateProduct}
+            handleCancel={handleCancel}
+          />
         )}
       </Container>
       <GlobalStyle />

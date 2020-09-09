@@ -37,7 +37,6 @@ class Thumb extends React.Component {
         className="img-thumbnail mt-2"
         height={200}
         width={200}
-        paddingTop={20}
       />
     );
   }

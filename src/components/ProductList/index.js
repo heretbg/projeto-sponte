@@ -1,5 +1,6 @@
 import React from "react";
 import { MdAddCircle, MdEdit, MdDelete } from "react-icons/md";
+import { format, parseISO } from "date-fns";
 
 import {
   Container,
@@ -35,7 +36,7 @@ function ProductList({ data, handleCreate, handleUpdate, handleDelete }) {
               <td>{produto.nome}</td>
               <td>{produto.codigoBarras}</td>
               <td>{produto.valor}</td>
-              <td>{produto.dataAquisicao}</td>
+              <td>{format(parseISO(produto.dataAquisicao), "dd/MM/yyyy")}</td>
               <ActionsRow>
                 <IconButton type="button" onClick={() => handleUpdate(produto)}>
                   <MdEdit size={20} color="#222" />
