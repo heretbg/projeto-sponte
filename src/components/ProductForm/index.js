@@ -17,8 +17,8 @@ import Thumb from "../Thumb";
 
 function ProductForm({ data, handleSave, handleCancel }) {
   const [valoresIniciais, setValoresIniciais] = useState({
-    nome: "teste",
-    descricao: "teste",
+    nome: "",
+    descricao: "",
     altura: 0,
     largura: 0,
     comprimento: 0,
@@ -26,8 +26,8 @@ function ProductForm({ data, handleSave, handleCancel }) {
     codigoBarras: 0,
     dataAquisicao: format(new Date(), "yyyy-MM-dd"),
     categorias: [],
-    valor: 1,
-    // imagem: null,
+    valor: 0,
+    imagem: null,
   });
 
   useEffect(() => {
@@ -60,7 +60,6 @@ function ProductForm({ data, handleSave, handleCancel }) {
       new Date(),
       "Data máxima de aquisição não deve ser superior à data atual"
     ),
-    // imagem: Yup.mixed().required("Carregue uma imagem"),
   });
 
   return (
@@ -136,7 +135,7 @@ function ProductForm({ data, handleSave, handleCancel }) {
               type="date"
             />
 
-            {/* <Medidas>
+            <Medidas>
               <div className="form-group">
                 <label htmlFor="imagem">Carregar Imagem</label>
                 <input
@@ -149,7 +148,7 @@ function ProductForm({ data, handleSave, handleCancel }) {
                 />
                 <Thumb file={values.file} />
               </div>
-            </Medidas> */}
+            </Medidas>
 
             <Botoes>
               <div>
