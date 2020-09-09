@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class Thumb extends React.Component {
   state = {
@@ -7,7 +7,9 @@ class Thumb extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.file) { return; }
+    if (!nextProps.file) {
+      return;
+    }
 
     this.setState({ loading: true }, () => {
       let reader = new FileReader();
@@ -24,15 +26,20 @@ class Thumb extends React.Component {
     const { file } = this.props;
     const { thumb } = this.state;
 
-    if (!file) { return null; }
+    if (!file) {
+      return null;
+    }
 
-    return (<img src={thumb}
-      alt={file.name}
-      className="img-thumbnail mt-2"
-      height={200}
-      width={200} 
-      paddingTop={20}  
-      />);
+    return (
+      <img
+        src={thumb}
+        alt={file.name}
+        className="img-thumbnail mt-2"
+        height={200}
+        width={200}
+        paddingTop={20}
+      />
+    );
   }
 }
 

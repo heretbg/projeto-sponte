@@ -1,23 +1,21 @@
-import React from 'react';
-import {
-  MdAddCircle,
-  MdEdit,
-  MdDelete,
-} from 'react-icons/md';
+import React from "react";
+import { MdAddCircle, MdEdit, MdDelete } from "react-icons/md";
 
-import { Container, Header, IconButton, Table, ActionsColumn, ActionsRow } from './styles';
+import {
+  Container,
+  Header,
+  IconButton,
+  Table,
+  ActionsColumn,
+  ActionsRow,
+} from "./styles";
 
 function ProductList({ data, handleCreate, handleUpdate, handleDelete }) {
   return (
     <Container>
       <Header>
-        <h1>
-          Produtos
-        </h1>
-        <IconButton
-          type="button"
-          onClick={() => handleCreate()}
-        >
+        <h1>Produtos</h1>
+        <IconButton type="button" onClick={() => handleCreate()}>
           <MdAddCircle size={20} color="#222" />
         </IconButton>
       </Header>
@@ -34,31 +32,20 @@ function ProductList({ data, handleCreate, handleUpdate, handleDelete }) {
         <tbody>
           {data.map((produto) => (
             <tr key={produto.id}>
-              <td>
-                {produto.nome}
-              </td>
-              <td>
-                {produto.codigoBarras}
-              </td>
-              <td>
-                {produto.valor}
-              </td>
-              <td>
-                {produto.dataAquisicao}
-              </td>
+              <td>{produto.nome}</td>
+              <td>{produto.codigoBarras}</td>
+              <td>{produto.valor}</td>
+              <td>{produto.dataAquisicao}</td>
               <ActionsRow>
-                  <IconButton
-                    type="button"
-                    onClick={() => handleUpdate(produto)}
-                  >
-                    <MdEdit size={20} color="#222" />
-                  </IconButton>
-                  <IconButton
-                    type="button"
-                    onClick={() => handleDelete(produto.id)}
-                  >
-                    <MdDelete size={20} color="#222" />
-                  </IconButton>
+                <IconButton type="button" onClick={() => handleUpdate(produto)}>
+                  <MdEdit size={20} color="#222" />
+                </IconButton>
+                <IconButton
+                  type="button"
+                  onClick={() => handleDelete(produto.id)}
+                >
+                  <MdDelete size={20} color="#222" />
+                </IconButton>
               </ActionsRow>
             </tr>
           ))}

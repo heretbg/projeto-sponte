@@ -17,27 +17,28 @@ import Thumb from "../Thumb";
 function ProductForm({ data, handleSave }) {
   const hoje = new Date();
 
-  const [valoresIniciais, setFormValues] = useState({
-    nome: "",
-    descricao: "",
+  const [valoresIniciais, setValoresIniciais] = useState({
+    nome: "teste",
+    descricao: "teste",
     altura: 0,
     largura: 0,
     comprimento: 0,
     peso: 0,
     codigoBarras: 0,
-    categorias: [{}],
-    valor: 0,
+    categorias: [],
+    valor: 1,
     dataAquisicao: hoje,
     imagem: null,
   });
 
   useEffect(() => {
     if (data) {
-      setFormValues(data);
+      setValoresIniciais(data);
     }
-  }, [setFormValues, data]);
+  }, [setValoresIniciais, data]);
 
   const handleSubmit = (values) => {
+    console.log(data);
     if (data && data.id) {
       handleSave(data.id, values);
     } else {
@@ -53,15 +54,14 @@ function ProductForm({ data, handleSave }) {
       .required("Descrição deve ser preenchida"),
     peso: Yup.number().required("Peso deve ser preenchido"),
     codigoBarras: Yup.number().required("Código de barras deve ser preenchido"),
-    categoria: Yup.string().required("Selecione pelo menos uma categoria"),
     valor: Yup.number()
       .positive("O valor deve ser positivo")
       .required("Valor deve ser preenchido"),
-    dataAquisicao: Yup.date().max(
-      hoje,
-      "Data máxima de aquisição não deve ser superior à data atual"
-    ),
-    imagem: Yup.mixed().required("Carregue uma imagem"),
+    // dataAquisicao: Yup.date().max(
+    //   hoje,
+    //   "Data máxima de aquisição não deve ser superior à data atual"
+    // ),
+    // imagem: Yup.mixed().required("Carregue uma imagem"),
   });
 
   return (
@@ -72,7 +72,7 @@ function ProductForm({ data, handleSave }) {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, handleChange, setFieldValue }) => (
+        {({ values, setFieldValue }) => (
           <Form>
             <h1>Produtos</h1>
             <CustomInput label="Nome" name="nome" type="text" />
@@ -97,23 +97,27 @@ function ProductForm({ data, handleSave }) {
             <div role="group">
               <CheckBox>
                 <label>
-                  <Field type="checkbox" name="categoria" value="software" />
+                  <Field type="checkbox" name="categorias" value="software" />
                   Software
                 </label>
                 <label>
-                  <Field type="checkbox" name="categoria" value="bebidas" />
+                  <Field type="checkbox" name="categorias" value="bebidas" />
                   Bebidas
                 </label>
                 <label>
-                  <Field type="checkbox" name="categoria" value="comidas" />
+                  <Field type="checkbox" name="categorias" value="comidas" />
                   Comidas
                 </label>
                 <label>
-                  <Field type="checkbox" name="categoria" value="hardware" />
+                  <Field type="checkbox" name="categorias" value="hardware" />
                   Hardware
                 </label>
                 <label>
-                  <Field type="checkbox" name="categoria" value="eletronicos" />
+                  <Field
+                    type="checkbox"
+                    name="categorias"
+                    value="eletronicos"
+                  />
                   Eletrônicos
                 </label>
               </CheckBox>
@@ -126,13 +130,14 @@ function ProductForm({ data, handleSave }) {
               type="number"
             />
             <CustomInput label="Valor (R$)" name="valor" type="number" />
-            <CustomInput
+
+            {/* <CustomInput
               label="Data de Aquisição"
               name="dataAquisicao"
               type="date"
-            />
+            /> */}
 
-            <Medidas>
+            {/* <Medidas>
               <div className="form-group">
                 <label htmlFor="imagem">Carregar Imagem</label>
                 <input
@@ -145,7 +150,7 @@ function ProductForm({ data, handleSave }) {
                 />
                 <Thumb file={values.file} />
               </div>
-            </Medidas>
+            </Medidas> */}
 
             <Botoes>
               <div>
