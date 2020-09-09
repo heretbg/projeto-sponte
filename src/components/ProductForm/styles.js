@@ -10,22 +10,6 @@ export const Container = styled.div`
     flex-direction: column;
     margin-top: 30px;
 
-    button {
-      margin: 5px 0 0;
-      height: 44px;
-      background: #3b9eff;
-      font-weight: bold;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: background 0.2s;
-
-      &:hover {
-        background: ${darken(0.03, "#3b9eff")};
-      }
-    }
-
     a {
       color: #fff;
       margin-top: 15px;
@@ -70,5 +54,17 @@ export const Botoes = styled.div`
 
 export const Button = styled.button`
   width: 150px;
-  margin: 5px 0;
-`
+  margin: 5px 0 0;
+  height: 44px;
+  background: #3b9eff;
+  font-weight: bold;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${darken(0.03, "#3b9eff")};
+  }
+`;

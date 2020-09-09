@@ -48,8 +48,8 @@ function ProductForm({ data, handleSave }) {
   const validationSchema = Yup.object().shape({
     nome: Yup.string().required("Nome deve ser preenchido"),
     descricao: Yup.string()
-      .min(1, "Descrição deve ter pelo menos 1 carácter")
-      .max(100, "Descrição deve ter no máximo 100 carácteres")
+      .min(1, "Descrição deve ter pelo menos 1 caractere")
+      .max(100, "Descrição deve ter no máximo 100 caracteres")
       .required("Descrição deve ser preenchida"),
     peso: Yup.number().required("Peso deve ser preenchido"),
     codigoBarras: Yup.number().required("Código de barras deve ser preenchido"),
@@ -121,7 +121,7 @@ function ProductForm({ data, handleSave }) {
 
             <CustomInput label="Peso" name="peso" type="number" />
             <CustomInput
-              label="Código e Barras"
+              label="Código de Barras"
               name="codigoBarras"
               type="number"
             />
@@ -134,7 +134,7 @@ function ProductForm({ data, handleSave }) {
 
             <Medidas>
               <div className="form-group">
-                <label for="imagem">Carregar Imagem</label>
+                <label htmlFor="imagem">Carregar Imagem</label>
                 <input
                   name="imagem"
                   type="file"
